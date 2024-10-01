@@ -31,9 +31,12 @@ public:
     void popFront();
     void popBack();
     void insert(T val, int index);
-    void remove(T val, int index);
+    void remove(int index);
     T& at(int index);
-    void erase(T val, int index);
+    bool contains(const T& value) const;
+    void erase(const T& );
+    bool empty() const;
+    size_t size() const;
 
 };
 

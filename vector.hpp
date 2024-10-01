@@ -33,12 +33,13 @@ public:
     // Destructor
     virtual ~Vector();
 
-    void push_back(const T& val);
+    void push(const T& val);
     void push(T&& val);
     void pop();
+    //void shrinkToFit();
     void clear();
-    std::size_t size() const;
-    std::size_t capacity() const;
+    inline std::size_t size() const;
+    inline std::size_t capacity() const;
     bool empty() const;
     T& operator[](std::size_t index);
     const T& operator[](std::size_t index) const;

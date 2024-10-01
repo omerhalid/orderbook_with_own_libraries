@@ -93,4 +93,69 @@ void Vector<T, S>::reserve(std::size_t reserveCapacity)
     if (reserveSize > this->capacity) resize(reserveSize);
 }
 
+template <typename T, size_t S>
+void Vector<T, S>::push(const T& val)
+{
+    if(capacity == size)
+    {
+        resize(capacity * 2);
+    }
 
+    data[size++] = val;
+}
+
+template <typename T, size_t S>
+void Vector<T, S>::push(T&& value) 
+{
+    if (capacity == 0) {
+        resize(1);
+    } else if (capacity == size) {
+        resize(capacity * 2);
+    }
+    data[size++] = std::move(value); // Move the value
+}
+
+
+template <typename T, size_t S>
+void Vector<T, S>::pop()
+{
+    if(size > 0)
+    {
+        --size;
+
+        // No need to manually call the destructor because we use smart pointers
+    } 
+    else
+    {
+        throw std::out_of_range("Cannot pop_back from an empty vector");
+    }
+}
+
+
+template <typename T, size_t S>
+void Vector<T, S>::clear()
+{
+     size = 0;
+    // No need to manually call the destructor because we use smart pointers
+}
+
+template <typename T, size_t S>
+inline std::size_t Vector<T, S>::size() const
+{
+    return this->size;
+}
+
+
+template <typename T, size_t S>
+inline std::size_t Vector<T, S>::capacity() const
+{
+    return this->capacity;
+}
+
+template <typename T, size_t S>
+inline bool Vector<T, S>::empty() const
+{
+    if(size > 0) return false;
+
+    return true;
+}

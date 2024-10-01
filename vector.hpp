@@ -32,7 +32,7 @@ public:
     // Default constructor
     Vector();
     // Destructor
-    virtual ~Vector();
+    ~Vector();
 
     void push(const T& val);
     void push(T&& val);

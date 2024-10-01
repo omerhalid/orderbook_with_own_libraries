@@ -14,7 +14,7 @@ private:
         std::unique_ptr<Node> next;
         Node* prev;
         
-        Node(const T& value) : data(value), prev(nullptr), next(nullptr) {}
+        Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
     };
     
     std::unique_ptr<Node> head;
@@ -31,9 +31,9 @@ public:
     void popFront();
     void popBack();
     void insert(T val, int index);
-    remove(T val, int index);
-    T at(int index);
-    void erase();
+    void remove(T val, int index);
+    T& at(int index);
+    void erase(T val, int index);
 
 };
 

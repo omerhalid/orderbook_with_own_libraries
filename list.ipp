@@ -15,3 +15,47 @@ void DoublyLinkedList<T>::pushFront(T val)
 {
     
 }
+
+template<typename T>
+void DoublyLinkedList<T>::pushBack(T val)
+{
+    
+}
+
+
+template<typename T>
+void DoublyLinkedList<T>::popFront()
+{
+    
+}
+
+
+template<typename T>
+void DoublyLinkedList<T>::popBack()
+{
+    
+}
+
+template<typename T>
+void DoublyLinkedList<T>::insert(T val, int index)
+{
+    
+}
+
+template<typename T>
+void DoublyLinkedList<T>::remove(T val, int index)
+{
+    
+}
+
+template<typename T>
+T& DoublyLinkedList<T>::at(int index)
+{
+    
+}
+
+template<typename T>
+void DoublyLinkedList<T>::erase(T val, int index)
+{
+    
+}

@@ -46,6 +46,32 @@ Vector<T, S>& Vector<T, S>::operator=(const Vector& obj)
     return *this
 }
 
+// move constructer
+template <typename T, size_t S>
+Vector<T, S>::Vector(Vector&& obj) noexcept : size(obj.size), capacity(obj.capacity), data(obj.data)
+{
+    obj.size = 0;
+    obj.capacity = 0;
+    obj.data = nullptr;
+}
+
+// move assignment operator
+template <typename T, size_t S>
+Vector<T, S>& Vector<T, S>::operator=(Vector&& obj) noexcept
+{
+    if(this != &obj)
+    {
+        size = obj.size;
+        capacity = obj.capacity;
+        if(obj.data)
+        {
+            data = std::make_unique<T[]>(obj.capacity);
+            std::copy(obj.data.get(), obj.data.get() + obj.size, data.get());
+        }
+    }
+    return *this
+}
+
 template <typename T, size_t S>
 void Vector<T, S>::resize(std::size_t newCapacity)
 {

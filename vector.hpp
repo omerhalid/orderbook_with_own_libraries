@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <memory>
+#include <algorithm>
+#include <stdexcept>
 
 template <typename T, size_t S = 2>
 class Vector
@@ -14,20 +16,19 @@ private:
     void resize(std::size_t newCapacity);
     void reserve(std::size_t reserveCapacity);
 
-    // copy constructer
+    // copy constructor
     Vector(const Vector& obj);
 
-    // copy assingment operator
+    // copy assignment operator
     Vector& operator=(const Vector& obj);
 
-    // move constructer
+    // move constructor
     Vector(Vector&& obj) noexcept;
 
     // move assignment operator
     Vector& operator=(Vector&& obj) noexcept;
 
 public:
-
     // Default constructor
     Vector();
     // Destructor
@@ -36,14 +37,15 @@ public:
     void push(const T& val);
     void push(T&& val);
     void pop();
-    //void shrinkToFit();
     void clear();
+    void shrink_to_fit();
     inline std::size_t size() const;
     inline std::size_t capacity() const;
     bool empty() const;
     T& operator[](std::size_t index);
     const T& operator[](std::size_t index) const;
+    T& at(std::size_t index);
+    const T& at(std::size_t index) const;
 };
-
 
 #include "vector.ipp"

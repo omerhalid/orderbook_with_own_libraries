@@ -12,13 +12,13 @@ private:
     struct Node {
         T data;
         std::unique_ptr<Node> next;
-        Node* prev;
+        std::unique_ptr<Node> prev;
         
         Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
     };
     
     std::unique_ptr<Node> head;
-    Node* tail;
+    std::unique_ptr<Node> tail;
     size_t size_;
 
 public:

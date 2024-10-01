@@ -1,6 +1,7 @@
 #include <vector>
 #include <list>
 #include <stdexcept>
+#include <iostream>
 
 template <typename K, typename V>
 class HashMap
@@ -26,3 +27,5 @@ public:
 
     V& operator[](const K& key); // Access value by key
 };
+
+#include "hashmap.ipp"

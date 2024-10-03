@@ -35,7 +35,7 @@ private:
     std::priority_queue<Order, std::vector<Order>, BuyOrderComperator> buyOrders;
     std::priority_queue<Order, std::vector<Order>, SellOrderComperator> sellOrders;
 
-    Matcher matcher;
+    MatchOrder matcher;
 
 public:
 

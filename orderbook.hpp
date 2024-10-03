@@ -26,6 +26,23 @@ private:
     template <typename Compare>
     void removeFromHeap(std::priority_queue<Order, std::vector<Order>, Compare> &heap, int id)
     {
+        std::vector<Order> temp;
+
+        while(!heap.empty())
+        {
+            Order top = heap.top();
+            heap.pop();
+
+            if(top.id != id)
+            {
+                temp.push_back(std::move(top));
+            }
+        }
+
+        for(const auto& order : temp)
+        {
+            heap.push(std::move(order));
+        }
 
     }
 

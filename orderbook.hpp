@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include "order.hpp"
+#include "matcher.hpp"
 #include "hashmap.hpp"
 
 class OrderBook
@@ -51,6 +52,8 @@ private:
     std::priority_queue<Order, std::vector<Order>, BuyOrderComperator> buyOrders;
     std::priority_queue<Order, std::vector<Order>, SellOrderComperator> sellOrders;
 
+    Matcher matcher;
+
 public:
 
     void addOrder(int id, double price, double quantity, bool isBuyOrder)
@@ -66,6 +69,9 @@ public:
 
         if(isBuyOrder) buyOrders.push(newOrder);
         else sellOrders.push(newOrder);
+
+        // Call matchOrders to attempt to match the new order
+        matcher.MatchOrders();
     }
 
     void cancelOrder(int id)
@@ -88,7 +94,26 @@ public:
         }
     }
     
-    void modifyOrder(int id, double newPrice, double newQuantity);
+    void modifyOrder(int id, double newPrice, double newQuantity)
+    {
+        if(orderMap.find(id) != orderMap.end())
+        {
+            Order& order = orderMap[id];
 
-    void matchOrder(); // will be moved to another.cpp
+            // Remove the order from the appropriate heap
+            if(order.isBuyOrder) removeFromHeap(buyOrders, id);
+            else removeFromHeap(sellOrders, id);
+
+            // Update the order in the orderMap
+            order.price = newPrice;
+            order.quantity = newQuantity;
+
+            // Add the updated order back to the appropriate heap
+            if(order.isBuyOrder) buyOrders.push(order);
+            else sellOrders.push(order);
+
+            // Call matchOrders to attempt to match the modified order
+            matcher.MatchOrders();
+        }
+    }
 };

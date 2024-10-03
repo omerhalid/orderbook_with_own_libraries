@@ -32,7 +32,7 @@ public:
     void insert(const K& key, const V& value);
     V& get(const K& key);
     const V& get(const K& key) const;
-    void remove(const K& key);
+    void erase(const K& key);
     bool contains(const K& key) const;
     
     V& operator[](const K& key);

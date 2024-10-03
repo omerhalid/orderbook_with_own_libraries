@@ -69,7 +69,7 @@ const V& HashMap<K, V>::get(const K& key) const {
 }
 
 template <typename K, typename V>
-void HashMap<K, V>::remove(const K& key) {
+void HashMap<K, V>::erase(const K& key) {
     size_t index = hash(key);
     auto& bucket = table[index];
     

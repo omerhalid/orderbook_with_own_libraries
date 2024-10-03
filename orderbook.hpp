@@ -23,6 +23,12 @@ private:
         }
     };
 
+    template <typename Compare>
+    void removeFromHeap(std::priority_queue<Order, std::vector<Order>, Compare> &heap, int id)
+    {
+
+    }
+
     HashMap<int, Order> orderMap;
 
     std::priority_queue<Order, std::vector<Order>, BuyOrderComperator> buyOrders;
@@ -34,7 +40,8 @@ public:
     {
         if(orderMap.find(id) != orderMap.end())
         {
-            std::cout<<"Order has been already created.\n"; // do i need this?
+            std::cout<<"Order has been already created before.\n";
+            return;
         }
 
         Order newOrder(id, price, quantity, isBuyOrder);
@@ -43,7 +50,27 @@ public:
         if(isBuyOrder) buyOrders.push(newOrder);
         else sellOrders.push(newOrder);
     }
-    void cancelOrder(int id);
+
+    void cancelOrder(int id)
+    {
+        if(orderMap.find(id) != orderMap.end())
+        {  
+            Order cancelledOrder = std::move(orderMap[id]);
+
+            try
+            {
+                orderMap.erase(id);
+            }
+            catch(const std::out_of_range& e)
+            {
+                std::cout << "Order not found: " << e.what() << std::endl;
+            }
+
+            if(cancelledOrder.isBuyOrder) removeFromHeap(buyOrders, id);
+            else removeFromHeap(sellOrders, id);
+        }
+    }
+    
     void modifyOrder(int id, double newPrice, double newQuantity);
 
     void matchOrder(); // will be moved to another.cpp

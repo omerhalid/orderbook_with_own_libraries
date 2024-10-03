@@ -30,4 +30,21 @@ private:
 
 public:
 
+    void addOrder(int id, double price, double quantity, bool isBuyOrder)
+    {
+        if(orderMap.find(id) != orderMap.end())
+        {
+            std::cout<<"Order has been already created.\n"; // do i need this?
+        }
+
+        Order newOrder(id, price, quantity, isBuyOrder);
+        orderMap[id] = newOrder;
+
+        if(isBuyOrder) buyOrders.push(newOrder);
+        else sellOrders.push(newOrder);
+    }
+    void cancelOrder(int id);
+    void modifyOrder(int id, double newPrice, double newQuantity);
+
+    void matchOrder(); // will be moved to another.cpp
 };

@@ -123,3 +123,47 @@ template <typename K, typename V>
 bool HashMap<K, V>::empty() const {
     return numElements == 0;
 }
+
+template <typename K, typename V>
+typename HashMap<K, V>::iterator HashMap<K, V>::begin() {
+    return iterator(table.begin(), table.end());
+}
+
+template <typename K, typename V>
+typename HashMap<K, V>::iterator HashMap<K, V>::end() {
+    return iterator(table.end(), table.end());
+}
+
+template <typename K, typename V>
+typename HashMap<K, V>::const_iterator HashMap<K, V>::begin() const {
+    return const_iterator(table.begin(), table.end());
+}
+
+template <typename K, typename V>
+typename HashMap<K, V>::const_iterator HashMap<K, V>::end() const {
+    return const_iterator(table.end(), table.end());
+}
+
+template <typename K, typename V>
+typename HashMap<K, V>::iterator HashMap<K, V>::find(const K& key) {
+    size_t index = hash(key);
+    auto& bucket = table[index];
+    for (auto it = bucket.begin(); it != bucket.end(); ++it) {
+        if (it->first == key) {
+            return iterator(table.begin() + index, table.end(), it);
+        }
+    }
+    return end();
+}
+
+template <typename K, typename V>
+typename HashMap<K, V>::const_iterator HashMap<K, V>::find(const K& key) const {
+    size_t index = hash(key);
+    const auto& bucket = table[index];
+    for (auto it = bucket.begin(); it != bucket.end(); ++it) {
+        if (it->first == key) {
+            return const_iterator(table.begin() + index, table.end(), it);
+        }
+    }
+    return end();
+}

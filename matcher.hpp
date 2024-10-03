@@ -6,10 +6,14 @@
 class MatchOrder
 {
 public:
-    void MatchOrders(std::priority_queue<Order, std::vector<Order>, OrderBook::BuyOrderComperator>& buyOrders,
-                     std::priority_queue<Order, std::vector<Order>, OrderBook::SellOrderComperator>& sellOrders,
-                     std::unordered_map<int, Order>& orderMap)
+
+    void MatchOrders(OrderBook& orderBook)
     {
+        // Access orderBook's data members directly
+        auto& buyOrders = orderBook.getBuyOrders();
+        auto& sellOrders = orderBook.getSellOrders();
+        auto& orderMap = orderBook.getOrderMap();
+
         // to be implemented
     }
 };
